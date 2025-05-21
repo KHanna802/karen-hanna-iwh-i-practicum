@@ -34,13 +34,20 @@ app.get('/update-cobj', (req, res) => {
 });
 // ROUTE 3 - Handle form submission
 app.post('/update-cobj', async (req, res) => {
+  // Handle the light_requirement_s_ field which could be an array or a string
+  let lightRequirement = req.body.light_requirement_s_;
+  if (Array.isArray(lightRequirement)) {
+    // If multiple checkboxes are selected, join them with commas
+    lightRequirement = lightRequirement.join(', ');
+  }
+
   const newPlant = {
     properties: {
       name: req.body.name,
       genus: req.body.genus,
       species: req.body.species,
       water_requirements: req.body.water_requirements,
-      light_requirement_s_: req.body.light_requirement_s_ || ''
+      light_requirement_s_: lightRequirement || ''
     }
   };
   const url = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJECT_NAME}`;
