@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title Plants Homepage
+  body
+    h1 All Plants
+    a(href='/update-cobj') Add to this table
+    table(border='1')
+      thead
+        tr
+          th Name
+          th Genus
+          th Species
+          th Light Requirements
+          th Water Requirements
+      tbody
+        each plant in plants
+          tr
+            td= plant.properties.name || 'n/a'
+            td= plant.properties.genus || 'n/a'
+            td= plant.properties.species || 'n/a'
+            td= plant.properties.light_requirement_s_ || 'n/a'
+            td= plant.properties.water_requirements || 'n/a'
